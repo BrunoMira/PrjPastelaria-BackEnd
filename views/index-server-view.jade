@@ -1,0 +1,20 @@
+extends layout-server-view
+
+block body
+  div
+    h2 My Blog
+    ul
+      li
+        a(href='/') Home
+      li
+        a(href='/postAdd-server-view') Add a new post
+
+    div(ng-view)
+
+    script(src='js/lib/angular/angular.js')
+    script(src='js/app-client-route.js')
+    script(src='js/services.js')
+    script(src='js/controllers/app-client-ctrl.js')
+    script(src='js/filters.js')
+    script(src='js/directives.js')  
+  

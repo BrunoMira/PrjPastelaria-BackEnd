@@ -25,10 +25,20 @@ router.route('/pedido')
         });
     });
 
+router.route('/pedido/etapa/:etapa')
+
+    .get(function (req, res) {
+        Pedido.find({ etapa: req.params.etapa }, function (err, pedidos) {
+            if (err)
+                res.send(err);
+
+            res.json(pedidos);
+        });
+    })
+
 router.route('/pedido/:id')
 
     .get(function (req, res) {
-        console.log('id = ' + req.params.id);
         Pedido.findOne({ _id: req.params.id }, function (err, pedido) {
             if (err)
                 res.send(err);
@@ -44,10 +54,10 @@ router.route('/pedido/:id')
                 res.send(err);
 
            for(prop in req.body){
-                Pedido[prop]=req.body[prop];
+                pedido[prop]=req.body[prop];
            }
 
-            Pedido.save(function(err) {
+            pedido.save(function(err) {
                 if (err)
                     res.send(err);
 
@@ -56,16 +66,32 @@ router.route('/pedido/:id')
 
         });
     })
-
-    .delete(function(req,res){
+    .delete(function (req, res) {
         Pedido.remove({
-            _id: req.params.id
-        }, function(err, pedido) {
+            _id: req.params.id,
+        }, function (err, pedido) {
             if (err)
                 res.send(err);
 
             res.json({ message: 'Deletado OK' });
         });
     });
+
+    
+router.route('/pedidos/todos')
+    .delete(function (req, res) {
+        Pedido.find((err, pedidos) => {
+            pedidos.forEach(function (element) {
+                Pedido.remove({ _id: element._id }, function (err, pedido){
+                    if(err)
+                    res.send(err);
+                })
+                console.log("Delete _ID: " + element._id)
+            }, this)
+            res.json({ message: 'Deletado OK' })
+        })
+    });
+
+    
 
 module.exports=router;

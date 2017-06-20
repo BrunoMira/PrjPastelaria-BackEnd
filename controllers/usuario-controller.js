@@ -27,15 +27,15 @@ router.route('/usuario')
 
 router.route('/usuario/autenticar')
     .post(function (req, res) {
-
-        
-        var usuario = new Usuario(req.body);
-
-        usuario = Usuario.findOne({login: req.body.login},function(err,e){
+        Usuario.findOne({ cpf: req.body.cpf }, function (err, e){
             if(err){
                 res.send(err)
             }
-            res.send(e);
+            if (e && e.senha == req.body.senha){
+                res.send(e);
+            }else{
+                res.send({usuario: null, message: "Nenhum usuario encontrado"});
+            }
         })
        
     });

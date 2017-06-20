@@ -3,7 +3,8 @@ var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
 
 var textoSchema=new Schema({
-    login: String,
+    cpf: String,
+    nome: String,
     senha: String,
     permissao: String,
 

@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var usuario = require('./controllers/usuario-controller');
 var pedido = require('./controllers/pedido-controller');
+var cliente = require('./controllers/cliente-controller');
+var produto = require('./controllers/produto-controller');
 var mongoose = require('mongoose');
 
 var app = express();
@@ -27,6 +29,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', usuario);
 app.use('/api', pedido);
+app.use('/api', produto);
+app.use('/api', cliente);
 
 app.listen(3000, function(){
   console.log("Express server listening on port", this.address().port);

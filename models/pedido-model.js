@@ -1,20 +1,23 @@
 
 var mongoose=require('mongoose');
-var Cliente = require('../models/cliente-model');
+var Produto = require('../models/produto-model');
 var Schema=mongoose.Schema;
 
 var PedidoSchema=new Schema({
     pizza: Array,
-    quantidade: Number,
-    bebida: String,
-    horaPedido: Date,
-    horaCozinha: Date,
-    horaEntrega: Date,
-    previsaoTermino: String,
+    horaPedidoFeito: Date,
+    horaPedidoAceito: Date,
+    horaCozinhaAceito: Date,
+    horaCozinhaPronto: Date,
+    horaEntregaCaminho: Date,
+    horaEntregaPronto: Date,
+    horaRejeita: Date,
     preco: Number,
+    precoTotal: Number,
+    estaPago: Boolean,
     etapa: String,
-
-    clienteId: Number
+    clienteCPF: String,
+    motivoRejeicao: String,
 
 });
 
